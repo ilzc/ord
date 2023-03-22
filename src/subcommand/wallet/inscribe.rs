@@ -59,7 +59,7 @@ pub(crate) struct Inscribe {
     default_value = "1_500",
     help = "set target postage <TARGET_POSTAGE>, defaults to 1_500 sats. "
   )]
-  pub(crate) target_postage: u64,
+  pub(crate) target_postage: Amount,
 }
 
 impl Inscribe {
@@ -162,9 +162,6 @@ impl Inscribe {
     no_limit: bool,
     target_postage: Amount,
   ) -> Result<(Transaction, Transaction, TweakedKeyPair)> {
-
-    TransactionBuilder::MAX_POSTAGE = TransactionBuilder::TARGET_POSTAGE * 2;
-
     let satpoint = if let Some(satpoint) = satpoint {
       satpoint
     } else {
@@ -236,7 +233,7 @@ impl Inscribe {
       commit_tx_address.clone(),
       change,
       commit_fee_rate,
-      reveal_fee + TransactionBuilder::TARGET_POSTAGE,
+      reveal_fee + target_postage,
     )?;
 
     let (vout, output) = unsigned_commit_tx
