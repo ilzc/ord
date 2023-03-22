@@ -54,6 +54,12 @@ pub(crate) struct Inscribe {
   pub(crate) dry_run: bool,
   #[clap(long, help = "Send inscription to <DESTINATION>.")]
   pub(crate) destination: Option<Address>,
+  #[clap(
+    long,
+    default_value = "1_500",
+    help = "set target postage <TARGET_POSTAGE>, defaults to 1_500 sats. "
+  )]
+  pub(crate) target_postage: u64,
 }
 
 impl Inscribe {
@@ -88,6 +94,7 @@ impl Inscribe {
         self.commit_fee_rate.unwrap_or(self.fee_rate),
         self.fee_rate,
         self.no_limit,
+        self.target_postage,
       )?;
 
     utxos.insert(
@@ -153,7 +160,11 @@ impl Inscribe {
     commit_fee_rate: FeeRate,
     reveal_fee_rate: FeeRate,
     no_limit: bool,
+    target_postage: Amount,
   ) -> Result<(Transaction, Transaction, TweakedKeyPair)> {
+
+    TransactionBuilder::MAX_POSTAGE = TransactionBuilder::TARGET_POSTAGE * 2;
+
     let satpoint = if let Some(satpoint) = satpoint {
       satpoint
     } else {
