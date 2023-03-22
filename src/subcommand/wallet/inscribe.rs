@@ -399,6 +399,7 @@ mod tests {
       FeeRate::try_from(1.0).unwrap(),
       FeeRate::try_from(1.0).unwrap(),
       false,
+      TransactionBuilder::TARGET_POSTAGE,
     )
     .unwrap();
 
@@ -430,6 +431,7 @@ mod tests {
       FeeRate::try_from(1.0).unwrap(),
       FeeRate::try_from(1.0).unwrap(),
       false,
+      TransactionBuilder::TARGET_POSTAGE,
     )
     .unwrap();
 
@@ -465,6 +467,7 @@ mod tests {
       FeeRate::try_from(1.0).unwrap(),
       FeeRate::try_from(1.0).unwrap(),
       false,
+      TransactionBuilder::TARGET_POSTAGE,
     )
     .unwrap_err()
     .to_string();
@@ -507,6 +510,7 @@ mod tests {
       FeeRate::try_from(1.0).unwrap(),
       FeeRate::try_from(1.0).unwrap(),
       false,
+      TransactionBuilder::TARGET_POSTAGE,
     )
     .is_ok())
   }
@@ -543,6 +547,7 @@ mod tests {
       FeeRate::try_from(fee_rate).unwrap(),
       FeeRate::try_from(fee_rate).unwrap(),
       false,
+      TransactionBuilder::TARGET_POSTAGE,
     )
     .unwrap();
 
@@ -605,6 +610,7 @@ mod tests {
       FeeRate::try_from(commit_fee_rate).unwrap(),
       FeeRate::try_from(fee_rate).unwrap(),
       false,
+      TransactionBuilder::TARGET_POSTAGE,
     )
     .unwrap();
 
@@ -654,6 +660,7 @@ mod tests {
       FeeRate::try_from(1.0).unwrap(),
       FeeRate::try_from(1.0).unwrap(),
       false,
+      TransactionBuilder::TARGET_POSTAGE,
     )
     .unwrap_err()
     .to_string();
@@ -685,6 +692,7 @@ mod tests {
       FeeRate::try_from(1.0).unwrap(),
       FeeRate::try_from(1.0).unwrap(),
       true,
+      TransactionBuilder::TARGET_POSTAGE,
     )
     .unwrap();
 
