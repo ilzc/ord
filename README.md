@@ -1,6 +1,12 @@
 `ord`
 =====
 
+Custom 600 sats in inscription.
+Command line Sample:
+```
+ord wallet inscribe --fee-rate 10 --postage 600 --destination bc1pXXXX <FILE>
+```
+
 `ord` is an index, block explorer, and command-line wallet. It is experimental
 software with no warranty. See [LICENSE](LICENSE) for more details.
 
