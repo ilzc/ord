@@ -56,10 +56,10 @@ pub(crate) struct Inscribe {
   pub(crate) destination: Option<Address>,
   #[clap(
     long,
-    default_value = "1_500",
-    help = "set target postage <TARGET_POSTAGE>, defaults to 1_500 sats. "
+    default_value = "1500",
+    help = "set target postage <POSTAGE>, defaults to 1500 sats. "
   )]
-  pub(crate) target_postage: Amount,
+  pub(crate) postage: u64,
 }
 
 impl Inscribe {
@@ -82,6 +82,8 @@ impl Inscribe {
       .map(Ok)
       .unwrap_or_else(|| get_change_address(&client))?;
 
+    let target_postage:Amount = Amount::from_sat(self.postage);
+
     let (unsigned_commit_tx, reveal_tx, recovery_key_pair) =
       Inscribe::create_inscription_transactions(
         self.satpoint,
@@ -94,7 +96,7 @@ impl Inscribe {
         self.commit_fee_rate.unwrap_or(self.fee_rate),
         self.fee_rate,
         self.no_limit,
-        self.target_postage,
+        target_postage,
       )?;
 
     utxos.insert(
